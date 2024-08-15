@@ -31,7 +31,7 @@ instance Show ( Printable a ) where
 
 instance Expr Printable where
   val x = Print ( show x )
-  -- eq x y = Print ( show $ x == y )
+  eq (Print x) (Print y) = Print ( "(" ++ x ++ " = " ++ y ++ ")")
   -- lt (Eval x) (Eval y) = Eval (x < y)
   -- not (Eval x) = Eval ( Prelude.not x )
   -- and (Eval x) (Eval y) = Eval ( x && y )
@@ -39,3 +39,6 @@ instance Expr Printable where
 
 example :: Printable Int
 example = val 1
+
+example2 :: Printable Bool
+example2 = eq (val 1) (val 1)
