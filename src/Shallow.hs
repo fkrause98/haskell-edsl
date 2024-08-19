@@ -11,29 +11,38 @@ class Expr e where
   _and :: e Bool -> e Bool -> e Bool
   or  :: e Bool -> e Bool -> e Bool
 
-data Eval t where
-  Eval :: t -> Eval t
+data Eval e = Expr e
 
 -- Definimos las distintas formas de evaluar
 -- como instancias de Eval
 instance Expr Eval where
-  val = Eval
-  eq (Eval x) (Eval y) = Eval (x == y)
-  lt (Eval x) (Eval y) = Eval (x < y)
-  _not (Eval x) = Eval ( Prelude.not x )
-  _and (Eval x) (Eval y) = Eval ( x && y )
-  or (Eval x) (Eval y) = Eval ( x || y )
+  val x = Expr x
+  eq (Expr x) (Expr y) = Expr (x == y)
+  lt (Expr x) (Expr y) = Expr (x < y)
+  _not (Expr x) = Expr ( Prelude.not x )
+  _and (Expr x) (Expr y) = Expr ( x && y )
+  or (Expr x) (Expr y) = Expr ( x || y )
 
-data Printable a = Print String
+instance Show t => Show ( Eval t ) where
+  show (Expr e) = show e
 
-instance Show ( Printable a ) where
-  show (Print s) = s
 
-instance Expr Printable where
-  val x = Print ( show x )
-  eq (Print x) (Print y) = Print ( "(" ++ x ++ " = " ++ y ++ ")")
-  lt (Print x) (Print y) = Print ( "(" ++ x ++ " < " ++ y ++ ")")
-  _not (Print x) = Print ("~" ++ x )
-  _and (Print x) (Print y) = Print ( x ++ "/" ++ "\\" ++ y )
-  or (Print x) (Print y) = Print( x ++ "\\" ++ "/" ++ y )
+-- Evaluación que hace string de una
+-- forma que tipa.
+data PrettyPrint a = PPrint String
 
+-- Boilerplate para poder imprimir,
+-- consta de simplemente devolver el
+-- string que venimos acumulando.
+instance Show ( PrettyPrint a ) where
+  show (PPrint s) = s
+
+-- Definimos cómo funciona un Expr con e = PrettyPPrint.
+-- nos apoyamos en 'show' de Haskell para armar strings.
+instance Expr PrettyPrint where
+  val x = PPrint ( show x )
+  eq (PPrint x) (PPrint y) = PPrint ( "(" ++ x ++ " = " ++ y ++ ")" )
+  lt (PPrint x) (PPrint y) = PPrint ( "(" ++ x ++ " < " ++ y ++ ")" )
+  _not (PPrint x) = PPrint ( "~" ++ x )
+  _and (PPrint x) (PPrint y) = PPrint ( x ++ " /" ++ "\\ " ++ y )
+  or (PPrint x) (PPrint y) = PPrint( x ++ " \\" ++ "/ " ++ y )
