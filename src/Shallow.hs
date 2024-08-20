@@ -44,5 +44,5 @@ instance Expr PrettyPrint where
   eq (PPrint x) (PPrint y) = PPrint ( "(" ++ x ++ " = " ++ y ++ ")" )
   lt (PPrint x) (PPrint y) = PPrint ( "(" ++ x ++ " < " ++ y ++ ")" )
   _not (PPrint x) = PPrint ( "~" ++ x )
-  _and (PPrint x) (PPrint y) = PPrint ( x ++ " /" ++ "\\ " ++ y )
+  _and (PPrint x) (PPrint y) = PPrint (x ++ " /" ++ "\\ " ++ y )
   or (PPrint x) (PPrint y) = PPrint( x ++ " \\" ++ "/ " ++ y )
