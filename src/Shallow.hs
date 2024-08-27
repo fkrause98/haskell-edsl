@@ -1,3 +1,8 @@
+-- Nombre: Francisco Krause Arnim
+-- Apellido: Krause Arnim
+-- Universidad: Universidad de Buenos Aires
+-- Libreta Universitaria: 99/19
+-- Email: fkrausear@gmail.com
 {-# LANGUAGE GADTs, KindSignatures, UnicodeSyntax #-}
 
 module Shallow where
@@ -13,8 +18,7 @@ class Expr e where
 
 data Eval e = Expr e
 
--- Definimos las distintas formas de evaluar
--- como instancias de Eval
+-- Interpretación de una expresión a su valor booleano.
 instance Expr Eval where
   val x = Expr x
   eq (Expr x) (Expr y) = Expr (x == y)
@@ -37,8 +41,7 @@ data PrettyPrint a = PPrint String
 instance Show ( PrettyPrint a ) where
   show (PPrint s) = s
 
--- Definimos cómo funciona un Expr con e = PrettyPPrint.
--- nos apoyamos en 'show' de Haskell para armar strings.
+-- Interpretación de una expresión a su representación como String.
 instance Expr PrettyPrint where
   val x = PPrint ( show x )
   eq (PPrint x) (PPrint y) = PPrint ( "(" ++ x ++ " = " ++ y ++ ")" )

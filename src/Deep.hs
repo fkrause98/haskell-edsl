@@ -1,3 +1,9 @@
+-- Nombre: Francisco Krause Arnim
+-- Apellido: Krause Arnim
+-- Universidad: Universidad de Buenos Aires
+-- Libreta Universitaria: 99/19
+-- Email: fkrausear@gmail.com
+
 {-# LANGUAGE GADTs, KindSignatures, UnicodeSyntax, DataKinds, FlexibleInstances #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
@@ -41,3 +47,4 @@ showBinaryExpr (x `Eq` y) = "(" ++ showExpr x ++ " " ++ "=" ++ " " ++ showExpr y
 showBinaryExpr (x `Lt` y) = "(" ++ showExpr x ++ " " ++ "<" ++ " " ++ showExpr y ++ ")"
 showBinaryExpr (x `And` y) = showExpr x ++ " " ++ " /" ++ "\\ " ++ " " ++ showExpr y
 showBinaryExpr (x `Or` y) = showExpr x ++ " " ++ " \\" ++ "/ " ++ " " ++ showExpr y
+
