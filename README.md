@@ -2,9 +2,13 @@
 Repositorio conteniendo el examen del curso de abordaje funcional a los EDSL.
 
 Nombre: Francisco 
+
 Apellido: Krause Arnim
+
 Universidad: Universidad de Buenos Aires
+
 Libreta: 99/19
+
 email: fkrausear@gmail.com
 
 ## Estructura
