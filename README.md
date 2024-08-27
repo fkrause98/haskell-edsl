@@ -11,8 +11,16 @@ Libreta: 99/19
 
 email: fkrausear@gmail.com
 
-## Estructura
+### Estructura de la entrega
 
+La entrega consiste de 4 archivos:
+- `src/Shallow.hs`y `src/Deep.hs` contienen la implementación Shallow y Depp (respectivamente) y sus evaluador a String y valor de verdad.
+- `src/Parser.hs` contiene el tipo *UProp* y su parser.
+
+- `src/Main.hs` contiene ejemplos del código definido
+  en los 3 archivos mencionado.
+
+### Disclaimer
 Me tomé la libertad de armar el código como un proyecto de Cabal,
 pero también se puede cargar el código en ghci.
 
